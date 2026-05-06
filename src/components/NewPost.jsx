@@ -1,48 +1,58 @@
 import { useState } from "react";
-import styles from "./NewPost.module.css";
+import { useNavigate, useOutletContext } from "react-router-dom";
+import styles from "./Post.module.css";
 
-function NewPost({ onClose, onAdd }) {
-  const [name, setName] = useState("");
-  const [content, setContent] = useState("");
+function NewPost() {
+  const { onAddPost } = useOutletContext();
+  const navigate = useNavigate();
 
-  const handleSubmit = () => {
-    if (!name || !content) return;
+  const [title, setTitle] = useState("");
+  const [body, setBody] = useState("");
 
-    onAdd({ name, content });
-    onClose();
+  const handleSubmit = (event) => {
+    event.preventDefault();
+
+    if (!title.trim() || !body.trim()) {
+      return;
+    }
+
+    onAddPost({ title, body });
+    navigate("/posts");
   };
 
   return (
-    <div className={styles.overlay}>
-      <div className={styles.modal}>
-        <h2>Add New Post</h2>
+    <form className={styles.container} onSubmit={handleSubmit}>
+      <h2>Add New Post</h2>
 
-        <label>Author Name:</label>
-        <input
-          type="text"
-          placeholder="Enter author name"
-          value={name}
-          onChange={(e) => setName(e.target.value)}
-        />
+      <input
+        type="text"
+        placeholder="Post title"
+        value={title}
+        onChange={(event) => setTitle(event.target.value)}
+        className={styles.input}
+      />
 
-        <label>Post Content:</label>
-        <textarea
-          placeholder="Enter post content"
-          value={content}
-          onChange={(e) => setContent(e.target.value)}
-        />
+      <textarea
+        placeholder="Post body"
+        value={body}
+        onChange={(event) => setBody(event.target.value)}
+        className={styles.textarea}
+      />
 
-        <div className={styles.buttons}>
-          <button onClick={handleSubmit} className={styles.create}>
-            Create Post
-          </button>
+      <div className={styles.buttonGroup}>
+        <button className={styles.button} type="submit">
+          Submit
+        </button>
 
-          <button onClick={onClose} className={styles.cancel}>
-            Cancel
-          </button>
-        </div>
+        <button
+          className={`${styles.button} ${styles.buttonCancel}`}
+          type="button"
+          onClick={() => navigate("/posts")}
+        >
+          Cancel
+        </button>
       </div>
-    </div>
+    </form>
   );
 }
 

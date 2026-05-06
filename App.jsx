@@ -2,9 +2,11 @@ import "./App.css";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 
 import Header from "./components/Header";
-import Posts from "./components/Posts";
+import Home from "./components/Home";
+import PostsLayout from "./components/PostsLayout";
 import PostList from "./components/PostList";
-import About from "./components/About";
+import PostDetails from "./components/PostDetails";
+import NewPost from "./components/NewPost";
 import PageNotFound from "./components/PageNotFound";
 
 function App() {
@@ -13,15 +15,14 @@ function App() {
       <Header />
 
       <Routes>
-        <Route path="/" element={<Posts />}>
+        <Route path="/" element={<Home />} />
+
+        <Route path="/posts" element={<PostsLayout />}>
           <Route index element={<PostList />} />
+          <Route path="new" element={<NewPost />} />
+          <Route path=":postId" element={<PostDetails />} />
         </Route>
 
-        <Route path="/posts" element={<Posts />}>
-          <Route index element={<PostList />} />
-        </Route>
-
-        <Route path="/about" element={<About />} />
         <Route path="*" element={<PageNotFound />} />
       </Routes>
     </BrowserRouter>

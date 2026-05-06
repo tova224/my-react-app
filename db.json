@@ -1,0 +1,19 @@
+{
+  "posts": [
+    {
+      "id": 1,
+      "title": "Tova Oshinsky",
+      "body": "This is my first post"
+    },
+    {
+      "id": 2,
+      "title": "John Doe",
+      "body": "This is my second post"
+    },
+    {
+      "id": 3,
+      "title": "Jane Smith",
+      "body": "This is my third post"
+    }
+  ]
+}

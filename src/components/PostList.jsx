@@ -1,19 +1,24 @@
-import { useOutletContext } from "react-router-dom";
-import PostPreview from "./PostPreview";
+import { useOutletContext, useNavigate } from "react-router-dom";
+import styles from "./Post.module.css";
 
 function PostList() {
   const { posts } = useOutletContext();
+  const navigate = useNavigate();
 
   return (
-    <>
-      {posts.map((post, index) => (
-        <PostPreview
-          key={index}
-          name={post.name}
-          content={post.content}
-        />
+    <div>
+      {posts.map((post) => (
+        <div
+          key={post.id}
+          className={styles.container}
+          onClick={() => navigate(`/posts/${post.id}`)}
+          style={{ cursor: "pointer" }}
+        >
+          <h2 className={styles.name}>{post.title}</h2>
+          <p className={styles.content}>{post.body}</p>
+        </div>
       ))}
-    </>
+    </div>
   );
 }
 

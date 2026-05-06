@@ -3,15 +3,19 @@ import { NavLink } from "react-router-dom";
 function Header() {
   return (
     <header style={styles.header}>
-      <NavLink to="/" style={getLinkStyle}>Home</NavLink>
-      <NavLink to="/posts" style={getLinkStyle}>Posts</NavLink>
-      <NavLink to="/about" style={getLinkStyle}>About</NavLink>
+      <NavLink to="/" style={linkStyle}>
+        Home
+      </NavLink>
+
+      <NavLink to="/posts" style={linkStyle}>
+        Posts
+      </NavLink>
     </header>
   );
 }
 
-const getLinkStyle = ({ isActive }) => ({
-  margin: "0 6px",
+const linkStyle = ({ isActive }) => ({
+  margin: "0 10px",
   color: isActive ? "red" : "black",
   textDecoration: "underline",
   fontSize: "18px",
